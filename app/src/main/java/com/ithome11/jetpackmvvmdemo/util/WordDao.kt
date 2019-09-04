@@ -1,0 +1,25 @@
+package com.ithome11.jetpackmvvmdemo.util
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+
+//DAO類需為 interface or abstract
+@Dao
+interface WordDao {
+    // Query 填寫sql語法
+
+    // ORDER BY  Column_name  排序結果  ASC 代表由小往大  DESC 大到小
+    @Query("SELECT * FROM word_table ORDER BY word ASC")
+    fun getAllWords():List<WordEntity>
+
+    //Insert有保留語法
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(wordEntity: WordEntity)
+
+    @Query("DELETE FROM word_table")
+    suspend fun deleteAll()
+
+
+}

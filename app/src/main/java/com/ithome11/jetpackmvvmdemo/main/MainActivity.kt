@@ -1,7 +1,8 @@
-package com.ithome11.jetpackmvvmdemo
+package com.ithome11.jetpackmvvmdemo.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.ithome11.jetpackmvvmdemo.R
 
 class MainActivity : AppCompatActivity() {
 
