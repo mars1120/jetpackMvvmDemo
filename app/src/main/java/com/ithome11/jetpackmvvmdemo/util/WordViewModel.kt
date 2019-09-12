@@ -12,11 +12,13 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         //從WordRoomDatabase引用唯一的wordDao構築WordRepository
-        val wordDao = WordRoomDatabase.getDatabase(application).WordDao()
-        repository = WordRepository(wordDao)
+        val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
+
+        repository = WordRepository(wordsDao)
         allWords = repository.allWords
     }
-    fun insertWord(word:WordEntity)= viewModelScope.launch {
+
+    fun insertWord(word: WordEntity) = viewModelScope.launch {
         repository.insert(word)
     }
 
