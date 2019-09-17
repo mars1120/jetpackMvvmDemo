@@ -33,7 +33,12 @@ class WordListAdapter internal constructor(
     }
 
     inner class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val wordItemView: TextView = itemView.findViewById(R.id.recyclerview)
+        val wordItemView: TextView = itemView.findViewById(R.id.textView)
+    }
+
+    internal fun setWords(words: List<WordEntity>) {
+        this.words = words
+        notifyDataSetChanged()
     }
 
 }
