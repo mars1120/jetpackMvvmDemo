@@ -68,6 +68,6 @@ class WordDaoTest {
         wordDao.insert(word2)
         wordDao.deleteAll()
         val allWords = wordDao.getAllWords().waitForValue()
-        Assert.assertTrue(!allWords.isEmpty())
+        Assert.assertTrue(allWords.isEmpty())
     }
 }
