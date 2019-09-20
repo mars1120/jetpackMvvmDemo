@@ -42,6 +42,8 @@ dependencies {
     //CoroutineScope擴充
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 
     androidTestImplementation 'androidx.test:runner:1.2.0'
