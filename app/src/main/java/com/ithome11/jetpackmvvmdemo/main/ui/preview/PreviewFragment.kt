@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.ithome11.jetpackmvvmdemo.R
+import com.ithome11.jetpackmvvmdemo.databinding.PreviewFragmentBinding
 
 class PreviewFragment : Fragment() {
 
@@ -23,24 +23,25 @@ class PreviewFragment : Fragment() {
         }
     }
 
-    private lateinit var viewModel: PreviewViewModel
+
+    private val previewViewModel: PreviewViewModel by lazy {
+        return@lazy ViewModelProviders.of(this).get(PreviewViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.preview_fragment, container, false)
+        var binding: PreviewFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.preview_fragment, container, false)
+        var rootView: View = binding.root
+        // setting values to model
+        binding.viewModel = previewViewModel
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PreviewViewModel::class.java)
-        val showPage = getArguments()?.getInt(ARG_PAGE) ?: 0
-        val tv: TextView = activity!!.findViewById(R.id.message)
-        tv.text = "傳遞過來的訊息是:" + showPage.toString()
-        tv.setOnClickListener {
-            Toast.makeText(context, "tv.text=" + tv.text, Toast.LENGTH_SHORT).show()
-        }
+        previewViewModel.message = getArguments()?.getInt(ARG_PAGE) ?: 0
     }
-
 }
