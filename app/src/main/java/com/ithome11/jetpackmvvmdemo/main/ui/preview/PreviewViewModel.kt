@@ -10,4 +10,8 @@ class PreviewViewModel : ViewModel() {
     fun onUpdateMessage(int: Int) {
         _message.value = int
     }
+
+    fun onClick() {
+        _message.value = _message.value!! + 1
+    }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -45,10 +44,5 @@ class PreviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         previewViewModel.onUpdateMessage(getArguments()?.getInt(ARG_PAGE) ?: 0)
-        val tv: TextView = activity!!.findViewById(R.id.message)
-        tv.setOnClickListener {
-            var mMessage = previewViewModel.message.value
-            previewViewModel.onUpdateMessage(mMessage!! + 1)
-        }
     }
 }
