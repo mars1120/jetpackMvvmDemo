@@ -28,7 +28,7 @@ class PreviewFragment : Fragment() {
     private val previewViewModel: PreviewViewModel by lazy {
         return@lazy ViewModelProviders.of(this).get(PreviewViewModel::class.java)
     }
-    private lateinit var mBinding: PreviewFragmentBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,17 +38,17 @@ class PreviewFragment : Fragment() {
         var rootView: View = binding.root
         // setting values to model
         binding.viewModel = previewViewModel
-        mBinding = binding
+        binding.setLifecycleOwner(this)
         return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        previewViewModel.message = getArguments()?.getInt(ARG_PAGE) ?: 0
+        previewViewModel.onUpdateMessage(getArguments()?.getInt(ARG_PAGE) ?: 0)
         val tv: TextView = activity!!.findViewById(R.id.message)
         tv.setOnClickListener {
-            previewViewModel.message++
-            mBinding.invalidateAll()
+            var mMessage = previewViewModel.message.value
+            previewViewModel.onUpdateMessage(mMessage!! + 1)
         }
     }
 }
