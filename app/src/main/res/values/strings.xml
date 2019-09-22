@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">jetpackMvvmDemo</string>
     <string name="click_to_start">Click to start</string>
+    <string name="stage01_result_format">%s + %s = %s</string>
 </resources>
