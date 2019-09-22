@@ -48,8 +48,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 
+    androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+
     androidTestImplementation "com.google.truth:truth:0.42"
     androidTestImplementation "androidx.arch.core:core-testing:$lifecycle_version"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
