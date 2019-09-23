@@ -5,6 +5,7 @@ import android.view.View
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
@@ -26,6 +27,7 @@ class Stage01ViewModelTest {
         Espresso.onView(ViewMatchers.withId(R.id.bt_plus)).perform(ViewActions.click())
     }
 
+
     @Test
     fun result_should_be_invisible_when_input() {
         // given
@@ -33,10 +35,33 @@ class Stage01ViewModelTest {
         Espresso.onView(ViewMatchers.withId(R.id.tv_result)).check(ViewAssertionsEx.isVisibility())
 
         // when
-        Espresso.onView(ViewMatchers.withId(R.id.et_left)).perform(ViewActions.typeText("22"))
+        Espresso.onView(ViewMatchers.withId(R.id.et_left)).perform(ViewActions.replaceText(""))
 
         // then
         Espresso.onView(ViewMatchers.withId(R.id.tv_result)).check(ViewAssertionsEx.isInvisible())
+    }
+
+    @Test
+    fun one_plus_one_is_two() {
+        // given
+        val givenVal = "1"
+
+        // when
+        Espresso.onView(ViewMatchers.withId(R.id.et_left)).perform(ViewActions.typeText(givenVal))
+        Espresso.onView(ViewMatchers.withId(R.id.et_right)).perform(ViewActions.typeText(givenVal))
+
+        // then
+        val expectedText = String.format(
+            rule.activity.getString(R.string.stage01_result_format),
+            givenVal,
+            givenVal,
+            "2"
+        )
+        Espresso.onView(ViewMatchers.withId(R.id.tv_result)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withText(expectedText)
+            )
+        )
     }
 
 
