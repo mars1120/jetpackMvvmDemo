@@ -46,6 +46,9 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+
+    implementation 'com.airbnb.android:lottie:2.8.0'
+
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 
     androidTestImplementation 'androidx.test:core:1.2.0'
