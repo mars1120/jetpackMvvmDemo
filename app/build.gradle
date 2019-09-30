@@ -49,6 +49,10 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:2.8.0'
 
+    def kodein_version = "6.1.0"
+    implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
+    implementation "org.kodein.di:kodein-di-framework-android-x:$kodein_version"
+
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 
     androidTestImplementation 'androidx.test:core:1.2.0'
