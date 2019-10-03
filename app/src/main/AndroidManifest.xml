@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.ithome11.jetpackmvvmdemo">
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -9,9 +10,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".main.s02.Stage02Activity"></activity>
+
+        <activity android:name=".main.s03.Stage03Activity"></activity>
+        <activity android:name=".main.s02.Stage02Activity" />
         <activity android:name=".main.s01.Stage01Activity" />
-        <activity android:name=".main.s03.Stage03Activity">
+        <activity android:name=".main.s04.S04Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
