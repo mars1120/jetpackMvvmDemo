@@ -7,26 +7,23 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.ithome11.jetpackmvvmdemo.R
 import com.ithome11.jetpackmvvmdemo.databinding.Stage02FragmentBinding
-import com.ithome11.jetpackmvvmdemo.main.s02.di.S02FragmentModule
 import kotlinx.android.synthetic.main.stage02_fragment.*
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
 import java.io.Serializable
 
 
-class Stage02Fragment : Fragment(), KodeinAware {
+class Stage02Fragment : Fragment() {
 
-    override val kodein: Kodein by lazy {
-        @Suppress("UNCHECKED_CAST")
-        val createKodein = arguments?.getSerializable("createKodein") as? () -> Kodein
-            ?: throw IllegalArgumentException("no createKodein for ${this::class.java.simpleName}")
-        createKodein()
+    private val createVMFactory: () -> ViewModelProvider.Factory by lazy {
+        arguments?.getSerializable("createVMFactory") as? () -> ViewModelProvider.Factory
+            ?: throw IllegalArgumentException("no createVMFactory for ${this::class.java.simpleName}")
     }
-
-    private val viewModel: Stage02ViewModel by instance()
+    val viewModel: Stage02ViewModel by lazy {
+        ViewModelProviders.of(this.activity!!, createVMFactory()).get(Stage02ViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,17 +61,11 @@ class Stage02Fragment : Fragment(), KodeinAware {
 
     companion object {
 
-        private val _createKodein: () -> Kodein by lazy {
-            {
-                Kodein.lazy { import(S02FragmentModule) }
-            }
-        }
-
         @JvmStatic
-        fun newInstance(createKodein: () -> Kodein = _createKodein) =
+        fun newInstance(createVMFactory: () -> ViewModelProvider.Factory = ::Stage02ViewModelFactory) =
             Stage02Fragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable("createKodein", createKodein as Serializable)
+                    putSerializable("createVMFactory", createVMFactory as Serializable)
                 }
             }
     }

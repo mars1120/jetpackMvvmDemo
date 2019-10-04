@@ -1,6 +1,8 @@
 package com.ithome11.jetpackmvvmdemo.main.s02
 
 import android.view.View
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
@@ -11,29 +13,36 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.ithome11.jetpackmvvmdemo.FragmentTestActivity
 import com.ithome11.jetpackmvvmdemo.R
-import com.ithome11.jetpackmvvmdemo.main.s02.DI.S02TestFragmentModule
 import com.ithome11.jetpackmvvmdemo.main.s02.ui.stage02.Stage02Fragment
+import com.ithome11.jetpackmvvmdemo.main.s02.ui.stage02.Stage02ViewModel
 import org.hamcrest.Matcher
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.kodein.di.Kodein
 
 @RunWith(AndroidJUnit4::class)
 class S02FragmentTest {
     @get:Rule
     val rule = object : ActivityTestRule<FragmentTestActivity>(FragmentTestActivity::class.java) {}
 
+    private fun justTrue() = true
 
     @Before
     fun setFragment() {
-        val createKodein: () -> Kodein = {
-            Kodein.lazy {
-                import(S02TestFragmentModule)
+
+        // given
+        val createVMFactory = {
+            object : ViewModelProvider.Factory {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                    Stage02ViewModel(::justTrue).apply {
+                        speedOfAnim.value = 10.0f
+                    } as T
             }
         }
-        rule.activity.replaceFragment(Stage02Fragment.newInstance(createKodein))
+
+        rule.activity.replaceFragment(Stage02Fragment.newInstance(createVMFactory))
     }
 
 
