@@ -16,6 +16,7 @@ import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.ithome11.jetpackmvvmdemo.BuildConfig.NEWS_API_KEY;
 import static junit.framework.Assert.assertEquals;
 
 @RunWith(RobolectricTestRunner.class)
@@ -45,7 +46,7 @@ public class callApiTest {
 
     @Test
     public void checkSearchSucessTest() {
-        NewsApi.getInstance().callGetNews("YourNewsKey").subscribe(response -> {
+        NewsApi.getInstance().callGetNews(NEWS_API_KEY).subscribe(response -> {
             ResultMsg = response.getStatus();
         }, throwable -> {
             ResultCode = ((ApiException) throwable).getCode();
