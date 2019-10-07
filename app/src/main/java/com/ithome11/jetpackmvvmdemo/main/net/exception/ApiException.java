@@ -73,11 +73,6 @@ public class ApiException extends Exception {
         } else if (e instanceof ApiException) {
             return (ApiException) e;
         } else {
-//            val errorJsonString = error.response().errorBody()?.string()
-//            message = JsonParser().parse(errorJsonString)
-//                    .asJsonObject["message"]
-//                    .asString
-//                    String errorJsonString =e.
             //未定義
             ex = new ApiException(ApiException.UNKNOWN, e.getMessage());
             return ex;
