@@ -84,3 +84,4 @@ lint/tmp/
 gen-external-apklibs
 output.json
 .idea/
+credentials.properties
